@@ -172,7 +172,6 @@
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-      debugger;
       var board = this.rows();
 
       // Iterate through all minor diagonal starting indices (exclude corners)
