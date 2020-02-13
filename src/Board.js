@@ -77,7 +77,7 @@
     // Test for conflicts in any given array
     hasConflict: function(arr) {
       var pieces = 0;
-      for (var square in arr) {
+      for (var square of arr) {
         pieces += square;
         if (pieces > 1) {
           return true;
@@ -91,12 +91,19 @@
     //
     // test if a specific row on this board contains a conflict
     hasRowConflictAt: function(rowIndex) {
-      return false; // fixme
+      var row = this.rows()[rowIndex];
+      return this.hasConflict(row);
     },
 
     // test if any rows on this board contain conflicts
     hasAnyRowConflicts: function() {
-      return false; // fixme
+      var board = this.rows();
+      for (var r = 0; r < board.length; r++) {
+        if (this.hasRowConflictAt(r)) {
+          return true;
+        }
+      }
+      return false;
     },
 
 
