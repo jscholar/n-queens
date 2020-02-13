@@ -164,12 +164,25 @@
     //
     // test if a specific minor diagonal on this board contains a conflict
     hasMinorDiagonalConflictAt: function(minorDiagonalColumnIndexAtFirstRow) {
-      return false; // fixme
+      var board = this.rows();
+      // Generate array representing major diagonal
+      var minDiag = board.map((row, i) => (minorDiagonalColumnIndexAtFirstRow - i < 0 || minorDiagonalColumnIndexAtFirstRow - i > row.length - 1) ? 0 : row[minorDiagonalColumnIndexAtFirstRow - i])
+      return this.hasConflict(minDiag);
     },
 
     // test if any minor diagonals on this board contain conflicts
     hasAnyMinorDiagonalConflicts: function() {
-      return false; // fixme
+      debugger;
+      var board = this.rows();
+
+      // Iterate through all minor diagonal starting indices (exclude corners)
+      var endingIndex = 2 * (board[0].length - 1);
+      for (var i = 1; i < endingIndex; i++) {
+        if (this.hasMinorDiagonalConflictAt(i)) {
+          return true;
+        }
+      }
+      return false;
     }
 
     /*--------------------  End of Helper Functions  ---------------------*/
