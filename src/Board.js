@@ -74,6 +74,18 @@
     =                 TODO: fill in these Helper Functions                    =
     =========================================================================*/
 
+    // Test for conflicts in any given array
+    hasConflict: function(arr) {
+      var pieces = 0;
+      for (var square in arr) {
+        pieces += square;
+        if (pieces > 1) {
+          return true;
+        }
+      }
+      return false;
+    },
+
     // ROWS - run from left to right
     // --------------------------------------------------------------
     //
