@@ -156,7 +156,7 @@
     // test if any columns on this board contain conflicts
     hasAnyColConflicts: function() {
       var board = this.rows();
-      for (var c = 0; c < board[0].length; c++) {
+      for (var c = 0; c < board.length; c++) {
         if (this.hasColConflictAt(c)) {
           return true;
         }
@@ -182,7 +182,7 @@
       var board = this.rows();
 
       // Iterate through all major diagonal starting indices (exclude corners)
-      var startingIndex = -(board[0].length - 2);
+      var startingIndex = -(board.length - 2);
       for (var i = startingIndex; i < board.length - 1; i++) {
         if (this.hasMajorDiagonalConflictAt(i)) {
           return true;
@@ -210,7 +210,7 @@
       var board = this.rows();
 
       // Iterate through all minor diagonal starting indices (exclude corners)
-      var endingIndex = 2 * (board[0].length - 1);
+      var endingIndex = 2 * (board.length - 1);
       for (var i = 1; i < endingIndex; i++) {
         if (this.hasMinorDiagonalConflictAt(i)) {
           return true;
