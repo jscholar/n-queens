@@ -74,11 +74,46 @@
     =                 TODO: fill in these Helper Functions                    =
     =========================================================================*/
 
+    // Subtract 1 from all squares attacked by a queen at a given square.
+    modifyQueenSquares: function(rowIndex, colIndex, num) {
+      var n = this.get('n');
+      // Slash the row
+      for (var c = 0; c < n; c++) {
+        if (c !== colIndex) {
+          this.rows()[rowIndex][c] += num;
+        }
+      }
+      // Slash the col
+      for (var r = 0; r < n; r++) {
+        if (r !== rowIndex) {
+          this.rows()[r][colIndex] += num;
+        }
+      }
+      // Slash the major diagonal
+      var majDiagStartingIndex = this._getFirstRowColumnIndexForMajorDiagonalOn(rowIndex, colIndex);
+      for (var r = 0; r < n; r++) {
+        var c = r + majDiagStartingIndex;
+        if (r !== rowIndex && (c < n && c >= 0)) {
+          this.rows()[r][c] += num;
+        }
+      }
+
+      var minDiagStartingIndex = this._getFirstRowColumnIndexForMinorDiagonalOn(rowIndex, colIndex);
+      for (var r = 0; r < n; r++) {
+        var c = minDiagStartingIndex - r;
+        if (r !== rowIndex && (c < n && c >= 0)) {
+          this.rows()[r][c] += num;
+        }
+      }
+    },
+
     // Test for conflicts in any given array
     hasConflict: function(arr) {
       var pieces = 0;
       for (var square of arr) {
-        pieces += square;
+        if (square === 1) {
+          pieces++;
+        }
         if (pieces > 1) {
           return true;
         }
